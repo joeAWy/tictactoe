@@ -11,7 +11,6 @@ class Scene(ABC):
     """
     def __init__(self, display):
         self.display = display
-        self.quit = False
         self.done = False
         # pygame.font.SysFont(name, size, bold=False, italic=False) -> Font
         self.font = SysFont("arialblack", 20)
@@ -21,9 +20,9 @@ class Scene(ABC):
     def handle_events(self, event):
         pass
     
-    @abstractmethod
-    def update(self):
-        pass
+    # @abstractmethod
+    # def update(self):
+    #     pass
 
     @abstractmethod
     def draw(self):

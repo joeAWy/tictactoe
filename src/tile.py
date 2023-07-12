@@ -8,6 +8,10 @@ TILE_IMAGES.append(load(os.path.join("assets", "empty_t.png")).convert())
 TILE_IMAGES.append(load(os.path.join("assets", "cross_t.png")).convert())
 TILE_IMAGES.append(load(os.path.join("assets", "circle_t.png")).convert())
 
+EMPTY_TILE = 0
+CROSS_TILE = 1
+CIRCLE_TILE = 2
+
 class Tile(Sprite):
     def __init__(self, row, column):
         super().__init__()
