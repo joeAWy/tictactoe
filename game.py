@@ -21,7 +21,7 @@ class Game:
         self.display = screen
         pygame.event.set_allowed([MOUSEBUTTONDOWN, QUIT, KEYDOWN])
         self.clock = pygame.time.Clock()
-        self.FPS = 60
+        self.FPS = 25
         self.scene = SceneManager(self.display)
 
     def handle_events(self):
@@ -31,10 +31,10 @@ class Game:
             elif event.type == MOUSEBUTTONDOWN or event.type == KEYDOWN:
                 self.scene.handle_events(event)
 
-    def update(self):
-        if self.scene.quit is True:
-            self.isRunning = False
-        self.scene.update()
+    # def update(self):
+    #     if self.scene.quit is True:
+    #         self.isRunning = False
+    #     self.scene.update()
 
     def draw(self):
         self.scene.draw()
@@ -43,6 +43,5 @@ class Game:
         while self.isRunning is True:
             self.clock.tick(self.FPS)
             self.handle_events()
-            self.update()
             self.draw()
-            pygame.display.update()
+            self.scene.change_scene()

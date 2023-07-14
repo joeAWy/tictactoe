@@ -1,7 +1,9 @@
 from .scene import Scene
 from .splashScene import SplashScene
-from .menuScene import MenuScene
-from .mainGame import MainGame
+from pygame.time import delay
+# from .menuScene import MenuScene
+# from .mainGame import MainGame
+# from .gameOver import GameOver
 
 
 class SceneManager:
@@ -12,24 +14,35 @@ class SceneManager:
         self.quit = False
         self.display = display
         self.currentScene: Scene = SplashScene(self.display)
-        self.previousScene = None
+        # self.previousScene = None
 
     def change_scene(self):
-        if isinstance(self.currentScene, SplashScene):
-            self.previousScene = self.currentScene
-            self.currentScene: Scene = MenuScene(self.display)
-        elif isinstance(self.currentScene, MenuScene):
-            self.previousScene = self.currentScene
-            self.currentScene: Scene = MainGame(self.display)
+        if self.currentScene.done is True:
+            delay(200)
+            self.currentScene = self.currentScene.nextScene
+
+        # if isinstance(self.currentScene, SplashScene):
+        #     self.currentScene: Scene = MenuScene(self.display)
+        # elif isinstance(self.currentScene, MenuScene):
+        #     if self.currentScene.quit is True:
+        #         self.quit = True
+        #     else:
+        #         self.currentScene: Scene = MainGame(self.display)
+        # elif isinstance(self.currentScene, MainGame):
+        #     self.currentScene: Scene = GameOver(self.display)
+        # elif isinstance(self.currentScene, GameOver):
+        #     if self.currentScene.quit is True:
+        #         self.quit = True
+        #     else:
+        #         self.currentScene: Scene = MainGame(self.display)
 
     def handle_events(self, event):
         self.currentScene.handle_events(event)
+        #self.change_scene()
 
-    def update(self):
-        if self.currentScene.update() is True:
-            self.change_scene()
-        if self.currentScene.quit is True:
-            self.quit = True
+    # def update(self):
+    #     if self.currentScene.update() is True:
+    #         self.change_scene()
 
     def draw(self):
         self.currentScene.draw()

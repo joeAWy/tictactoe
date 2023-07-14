@@ -1,5 +1,7 @@
 from .scene import Scene
+from .menuScene import MenuScene
 from pygame import Color
+from pygame.display import update
 from pygame.locals import (KEYDOWN, K_ESCAPE, K_RETURN)
 
 class SplashScene(Scene):
@@ -9,6 +11,7 @@ class SplashScene(Scene):
         self.title = self.font.render("Pygame Tic Tac Toe", True, Color(0,255,0))
         # pygame.Surface.get_rect(**kwargs) -> Rect : keyword args can set rect position
         self.titleRect = self.title.get_rect(center=(self.display.get_width()/2, self.display.get_height()/2))
+        self.nextScene = MenuScene(self.display)
 
     def handle_events(self, event):
         if event.type == KEYDOWN:
@@ -18,6 +21,8 @@ class SplashScene(Scene):
     def draw(self):
         self.display.fill((0,0,0))
         self.display.blit(self.title, self.titleRect)
+        update()
+        
     
-    def update(self):
-        return self.done
+    # def update(self):
+    #     return self.done
